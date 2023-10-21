@@ -1,0 +1,40 @@
+xdm_version: latest
+xdm_active_image: semarchy/xdm:{{ .Values.xdm_version }}
+xdm_passive_image: semarchy/xdm:{{ .Values.xdm_version }}-passive
+
+# DNS Configuration
+active_host_name: active.xdm.yourdomain.com
+passive_host_name: xdm.yourdomain.com
+
+# Pod Configurations
+active_mem_requests: 2Gi
+active_mem_limits: 3Gi
+
+passive_node_replicas: 1
+passive_mem_requests: 2Gi
+passive_mem_limits: 3Gi
+
+# This is a one-time value used when provisioning the cluster
+xdm_setup_token: mySecretToken
+
+# Database Users and Configuration
+# -- PostgreSQL --
+repository_driver: org.postgresql.Driver
+#repository_url: jdbc:postgresql://<cluster-ip-address>:<cluster-port>/semarchy_repository
+repository_url: jdbc:postgresql://host.minikube.internal:5432/postgres
+# -- SQL Server --
+#repository_driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+#repository_url: jdbc:sqlserver://localhost:1433;databaseName=REPOSITORY
+# -- Oracle Database --
+#repository_driver: oracle.jdbc.OracleDriver
+#repository_url: jdbc:oracle:thin:@localhost:1521:XE
+#repository_ro_cnxn_init_sql: ALTER SESSION SET CURRENT_SCHEMA = repository_user
+
+# repository_username: repo_db_user
+# repository_password: repo_db_user_pw
+# repository_ro_username: repo_ro_user
+# repository_ro_password: repo_ro_pw
+repository_username: semarchy_repository
+repository_password: semarchy_repository
+repository_ro_username: semarchy_repository_ro
+repository_ro_password: semarchy_repository_ro

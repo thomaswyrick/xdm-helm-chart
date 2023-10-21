@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/affinity: "cookie"
+    nginx.ingress.kubernetes.io/session-cookie-name: "sticksemarchy"
+    nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
+    nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
+  name: ingress
+  namespace: default
+spec:
+  rules:
+  - host: {{ .Values.passive_host_name }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: semarchy-appserver-passive
+            port:
+              number: 8080
+        path: /
+        pathType: Prefix
+  - host: {{ .Values.active_host_name }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: semarchy-appserver-active
+            port:
+              number: 8080
+        path: /
+        pathType: Prefix
+#   tls:
+#   - hosts:
+#     - {{ .Values.passive_host_name }}
+#     - {{ .Values.active_host_name }}
+#     secretName: {{ .Release.Name }}-key-secret

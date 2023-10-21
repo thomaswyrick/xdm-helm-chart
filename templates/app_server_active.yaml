@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: semarchy-appserver-active
+  labels:
+    app: semarchy-appserver-active
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: semarchy-appserver-active
+  template:
+    metadata:
+      labels:
+        app: semarchy-appserver-active
+    spec:
+      containers:
+        - image: {{ tpl .Values.xdm_active_image . }}
+          name: semarchy-appserver-active
+          resources:
+            requests:
+              memory: "{{ .Values.active_mem_requests }}"
+            limits:
+              memory: "{{ .Values.active_mem_limits }}"
+          envFrom:
+            - configMapRef:
+                name: xdm-configmap
+          ports:
+            - containerPort: 8080
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: semarchy-appserver-active
+  labels:
+    app: semarchy-appserver-active
+spec:
+  ports:
+    - port: 8080
+  selector:
+    app: semarchy-appserver-active
