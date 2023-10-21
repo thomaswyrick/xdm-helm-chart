@@ -15,13 +15,13 @@ passive_mem_requests: 2Gi
 passive_mem_limits: 3Gi
 
 # This is a one-time value used when provisioning the cluster
-xdm_setup_token: mySecretToken
+semarchy_setup_token: mySecretToken
 
 # Database Users and Configuration
 # -- PostgreSQL --
 repository_driver: org.postgresql.Driver
 #repository_url: jdbc:postgresql://<cluster-ip-address>:<cluster-port>/semarchy_repository
-repository_url: jdbc:postgresql://host.minikube.internal:5432/postgres
+xdm_repository_url: jdbc:postgresql://host.minikube.internal:5432/postgres
 # -- SQL Server --
 #repository_driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
 #repository_url: jdbc:sqlserver://localhost:1433;databaseName=REPOSITORY
@@ -34,7 +34,7 @@ repository_url: jdbc:postgresql://host.minikube.internal:5432/postgres
 # repository_password: repo_db_user_pw
 # repository_ro_username: repo_ro_user
 # repository_ro_password: repo_ro_pw
-repository_username: semarchy_repository
-repository_password: semarchy_repository
-repository_ro_username: semarchy_repository_ro
-repository_ro_password: semarchy_repository_ro
+xdm_repository_username: semarchy_repository
+xdm_repository_password: semarchy_repository
+xdm_repository_ro_username: semarchy_repository_ro
+xdm_repository_ro_password: semarchy_repository_ro

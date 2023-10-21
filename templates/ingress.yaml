@@ -11,7 +11,7 @@ metadata:
   namespace: default
 spec:
   rules:
-  - host: {{ .Values.passive_host_name }}
+  - host: {{.Values.passive_host_name}}
     http:
       paths:
       - backend:
@@ -21,7 +21,7 @@ spec:
               number: 8080
         path: /
         pathType: Prefix
-  - host: {{ .Values.active_host_name }}
+  - host: {{.Values.active_host_name}}
     http:
       paths:
       - backend:

@@ -37,8 +37,20 @@ minikube start --driver qemu --network socket_vmnet --memory 8g
 
 
 TODO:
-Expose logs
 Add app online check
 Add tls
 Add better logging
+-semarchy.log
 -job logs
+
+kubectl create secret generic xdm-repository \
+    --from-literal=repository_driver='org.postgresql.Driver' \
+    --from-literal=repository_url='jdbc:postgresql://host.minikube.internal:5432/postgres' \
+    --from-literal=repository_username='semarchy_repository' \
+    --from-literal=repository_password='semarchy_repository' \
+    --from-literal=repository_ro_username='semarchy_repository' \
+    --from-literal=repository_ro_password='semarchy_repository'
+
+helm install dev .\
+--set xdm-repository-user-name=semarchy_repository \
+--set xdm-repository-password=semarchy_repository

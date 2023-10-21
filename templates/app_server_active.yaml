@@ -15,18 +15,57 @@ spec:
         app: semarchy-appserver-active
     spec:
       containers:
-        - image: {{ tpl .Values.xdm_active_image . }}
+        - image: {{tpl .Values.xdm_active_image .}}
           name: semarchy-appserver-active
           resources:
             requests:
               memory: "{{ .Values.active_mem_requests }}"
             limits:
               memory: "{{ .Values.active_mem_limits }}"
-          envFrom:
-            - configMapRef:
-                name: xdm-configmap
+          env:
+            - name: XDM_REPOSITORY_DRIVER
+              valueFrom:
+                configMapKeyRef:
+                  name: xdm-configmap
+                  key: XDM_REPOSITORY_DRIVER
+            - name: SEMARCHY_SETUP_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: xdm-secrets
+                  key: semarchy_setup_token
+            - name: XDM_REPOSITORY_URL
+              valueFrom:
+                secretKeyRef:
+                  name: xdm-secrets
+                  key: xdm_repository_url
+            - name: XDM_REPOSITORY_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: xdm-secrets
+                  key: xdm_repository_username
+            - name: XDM_REPOSITORY_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: xdm-secrets
+                  key: xdm_repository_password
+            - name: XDM_REPOSITORY_READONLY_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: xdm-secrets
+                  key: xdm_repository_ro_username
+            - name: XDM_REPOSITORY_READONLY_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: xdm-secrets
+                  key: xdm_repository_ro_password
           ports:
             - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /semarchy/api/rest/probes/started
+              port: 8080
+            initialDelaySeconds: 3
+            periodSeconds: 10
       restartPolicy: Always
 ---
 apiVersion: v1
