@@ -37,11 +37,16 @@ minikube start --driver qemu --network socket_vmnet --memory 8g
 
 
 TODO:
-Add app online check
 Add tls
-Add better logging
--semarchy.log
--job logs
+log out semarchy.log
+Add secret management
+-with or without ext
+Add app online check -DONE
+Add all env variables for simplicity
+add namespacing
+-AWS specific install
+-AKS specific install
+
 
 kubectl create secret generic xdm-repository \
     --from-literal=repository_driver='org.postgresql.Driver' \

@@ -3,8 +3,8 @@ kind:  ConfigMap
 metadata:
   name: xdm-configmap
 data:
-  XDM_REPOSITORY_DRIVER: {{ .Values.repository_driver }}
+  XDM_REPOSITORY_DRIVER: {{.Values.repository_driver}}
 
-  {{ if eq .Values.repository_driver "oracle.jdbc.OracleDriver" }}
+  {{if eq .Values.repository_driver "oracle.jdbc.OracleDriver"}}
   XDM_REPOSITORY_READONLY_CONNECTIONINITSQL: {{ .Value.repository_ro_cnxn_init_sql }}
-  {{ end }}
+  {{end}}

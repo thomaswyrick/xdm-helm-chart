@@ -22,12 +22,10 @@ spec:
               memory: "{{.Values.passive_mem_requests}}"
             limits:
               memory: "{{.Values.passive_mem_limits}}"
+          envFrom:
+            - configMapRef:
+                name: xdm-configmap
           env:
-            - name: XDM_REPOSITORY_DRIVER
-              valueFrom:
-                configMapKeyRef:
-                  name: xdm-configmap
-                  key: XDM_REPOSITORY_DRIVER
             - name: SEMARCHY_SETUP_TOKEN
               valueFrom:
                 secretKeyRef:
