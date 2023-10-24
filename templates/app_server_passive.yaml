@@ -25,45 +25,17 @@ spec:
           envFrom:
             - configMapRef:
                 name: xdm-configmap
-          env:
-            - name: SEMARCHY_SETUP_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: xdm-secrets
-                  key: semarchy_setup_token
-            - name: XDM_REPOSITORY_URL
-              valueFrom:
-                secretKeyRef:
-                  name: xdm-secrets
-                  key: xdm_repository_url
-            - name: XDM_REPOSITORY_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: xdm-secrets
-                  key: xdm_repository_username
-            - name: XDM_REPOSITORY_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: xdm-secrets
-                  key: xdm_repository_password
-            - name: XDM_REPOSITORY_READONLY_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: xdm-secrets
-                  key: xdm_repository_ro_username
-            - name: XDM_REPOSITORY_READONLY_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: xdm-secrets
-                  key: xdm_repository_ro_password
+          # envFrom:
+          #   - secretRef:
+          #       name: xdm-secrets
           ports:
             - containerPort: 8080
-          livenessProbe:
-            httpGet:
-              path: /semarchy/api/rest/probes/started
-              port: 8080
-            initialDelaySeconds: 3
-            periodSeconds: 10
+          # livenessProbe:
+          #   httpGet:
+          #     path: /semarchy/api/rest/probes/started
+          #     port: 8080
+          #   initialDelaySeconds: 3
+          #   periodSeconds: 10
       restartPolicy: Always
 ---
 apiVersion: v1

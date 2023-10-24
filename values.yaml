@@ -3,8 +3,15 @@ xdm_active_image: semarchy/xdm:{{ .Values.xdm_version }}
 xdm_passive_image: semarchy/xdm:{{ .Values.xdm_version }}-passive
 
 # DNS Configuration
-active_host_name: active.xdm.yourdomain.com
-passive_host_name: xdm.yourdomain.com
+active_host_name: xdma.aks.servers.semarchy.com
+passive_host_name: xdm.aks.servers.semarchy.com
+
+# Cert Manager Configuration
+# -- ACME Staging ---
+#acme_server_url: https://acme-staging-v02.api.letsencrypt.org/directory
+# -- ACME Prod ---
+acme_server_url: https://acme-v02.api.letsencrypt.org/directory
+acme_registration_email: thomas.wyrick@semarchy.com
 
 # Pod Configurations
 active_mem_requests: 2Gi
@@ -21,7 +28,7 @@ semarchy_setup_token: mySecretToken
 # -- PostgreSQL --
 repository_driver: org.postgresql.Driver
 #repository_url: jdbc:postgresql://<cluster-ip-address>:<cluster-port>/semarchy_repository
-xdm_repository_url: jdbc:postgresql://host.minikube.internal:5432/postgres
+xdm_repository_url: jdbc:postgresql://xdm.postgres.database.azure.com:5432/postgres
 # -- SQL Server --
 #repository_driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
 #repository_url: jdbc:sqlserver://localhost:1433;databaseName=REPOSITORY

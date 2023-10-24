@@ -23,3 +23,9 @@ version: 0.1.0
 # It is recommended to use it with quotes.
 appVersion: "1.16.0"
 icon: https://cdn-kbjbh.nitrocdn.com/wvDvVTGOEVEZTAtrMdEuemkzfAajGxeU/assets/images/optimized/rev-7858ec8/semarchy.com/wp-content/uploads/2021/12/Semarchy-xDM-logo.svg
+dependencies:
+  - name: cert-manager
+    version: v1.13.1
+    repository: https://charts.jetstack.io
+    alias: cert-manager
+    condition: cert-manager.enabled

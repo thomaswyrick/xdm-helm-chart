@@ -1,33 +1,17 @@
-## Deploy the cert-manager
-
-1. Add the Helm repository.
-'helm repo add jetstack https://charts.jetstack.io
-"jetstack" has been added to your repositories'
-
-2. Upate the repository.
-'helm repo update                                 
-Hang tight while we grab the latest from your chart repositories...
-...Successfully got an update from the "jetstack" chart repository
-Update Complete. ⎈Happy Helming!⎈'
-
-3. Deploy cert-manager
-'helm install cert-manager jetstack/cert-manager \
-  --namespace cert-manager --create-namespace \
-  --version v1.9.1  --set installCRDs=true'
-
-4. Validate deployment
-'kubectl get deployments --namespace cert-manager
-NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
-cert-manager              1/1     1            1           76s
-cert-manager-cainjector   1/1     1            1           76s
-cert-manager-webhook      1/1     1            1           76s'
+Install CRDS
+kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.1.0/cert-manager.crds.yaml
 
 
 Enable ingress on Minikube
 'minikube addons enable ingress'
 
 Install NGINX
+--Nor sure if we need this. Just use the bottom one.
 'helm install my-release oci://ghcr.io/nginxinc/charts/nginx-ingress --version 1.0.1'
+
+helm upgrade --install ingress-nginx ingress-nginx \
+  --repo https://kubernetes.github.io/ingress-nginx \
+  --namespace ingress-nginx --create-namespace
 
 Get ingress ip
 'kubectl get ingress'
@@ -46,16 +30,5 @@ Add all env variables for simplicity
 add namespacing
 -AWS specific install
 -AKS specific install
-
-
-kubectl create secret generic xdm-repository \
-    --from-literal=repository_driver='org.postgresql.Driver' \
-    --from-literal=repository_url='jdbc:postgresql://host.minikube.internal:5432/postgres' \
-    --from-literal=repository_username='semarchy_repository' \
-    --from-literal=repository_password='semarchy_repository' \
-    --from-literal=repository_ro_username='semarchy_repository' \
-    --from-literal=repository_ro_password='semarchy_repository'
-
-helm install dev .\
---set xdm-repository-user-name=semarchy_repository \
---set xdm-repository-password=semarchy_repository
+make db install simpler
+add all env variables
