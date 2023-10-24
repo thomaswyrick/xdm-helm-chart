@@ -1,8 +1,8 @@
-[x] Startup probes check 
-[x] Automatic TLS
-[ ] Log semarchy.log to stdout
-[ ] Secret management with encryption
-[ ] Add stubs and descriptions for all supported environment variables
-[ ] Namespacing
-[ ] AWS specific install instructions
-[ ] Simplify DB install
+- [x] Startup probes check 
+- [x] Automatic TLS
+- [ ] Log semarchy.log to stdout
+- [ ] Secret management with encryption
+- [ ] Add stubs and descriptions for all supported environment variables
+- [ ] Namespacing
+- [ ] AWS specific install instructions
+- [ ] Simplify DB install
