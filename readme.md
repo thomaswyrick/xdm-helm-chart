@@ -1,37 +1,58 @@
-Install CRDS
-kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.1.0/cert-manager.crds.yaml
+## Introduction
+The intent of this chart is to simplify Semarchy xDM installations. 
 
+### Running on minikube
 
-Enable ingress on Minikube
+1. Start minikube on Mac M1
+'minikube start --driver qemu --network socket_vmnet --memory 8g'
+
+2. Enable ingress in Minikube
 'minikube addons enable ingress'
 
-Install NGINX
---Nor sure if we need this. Just use the bottom one.
-'helm install my-release oci://ghcr.io/nginxinc/charts/nginx-ingress --version 1.0.1'
-
-helm upgrade --install ingress-nginx ingress-nginx \
+3. Install NGINX Ingress
+'helm upgrade --install ingress-nginx ingress-nginx \
   --repo https://kubernetes.github.io/ingress-nginx \
-  --namespace ingress-nginx --create-namespacebre
+  --namespace ingress-nginx --create-namespace'
 
-helm plugin install https://github.com/jkroepke/helm-secrets --version v4.5.1
+4. Install CRDS
+'kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.1.0/cert-manager.crds.yaml'
 
-Get ingress ip
+
+5. Get IP address for K8 Ingress
 'kubectl get ingress'
 
-start minikube mac m1
-minikube start --driver qemu --network socket_vmnet --memory 8g   
+6. Add entries for active and passive hostnames in the hosts file pointing to ingress
+
+7. Modify values.yaml accordingly
+
+8. Launch
+'helm install xdm-minikube .'
+
+### Runnong on AKS
+1. Set K8 Context
+'az aks get-credentials --name ts-aks-test-2 --resource-group ts-tomwyrick-aks-test'
+
+2. Install NGINX Ingress
+'helm install ingress-nginx ingress-nginx/ingress-nginx \
+  --create-namespace \
+  --namespace ingress-nginx \
+  --set controller.service.annotations."service\.beta\.kubernetes\.io/azure-load-balancer-health-probe-request-path"=/healthz'
+
+3. Install CRDS
+'kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.1.0/cert-manager.crds.yaml'
 
 
-TODO:
-Add tls (done)
-log out semarchy.log
-Add secret management
--with or without ext
-Add app online check -DONE
-Add all env variables for simplicity
-add namespacing
--AWS specific install
--AKS specific install
-make db install simpler
-add all env variables
-package other helm charts
+4. Get IP address for K8 Ingress
+'kubectl get ingress'
+
+5. Create DNS entries for acrtive and passive hostnames. I used Route 53.
+
+6. Modify values.yaml accordingly
+
+7. Launch
+'helm install xdm-minikube .'
+
+
+
+
+
