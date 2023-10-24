@@ -11,7 +11,9 @@ Install NGINX
 
 helm upgrade --install ingress-nginx ingress-nginx \
   --repo https://kubernetes.github.io/ingress-nginx \
-  --namespace ingress-nginx --create-namespace
+  --namespace ingress-nginx --create-namespacebre
+
+helm plugin install https://github.com/jkroepke/helm-secrets --version v4.5.1
 
 Get ingress ip
 'kubectl get ingress'
@@ -21,7 +23,7 @@ minikube start --driver qemu --network socket_vmnet --memory 8g
 
 
 TODO:
-Add tls
+Add tls (done)
 log out semarchy.log
 Add secret management
 -with or without ext
@@ -32,3 +34,4 @@ add namespacing
 -AKS specific install
 make db install simpler
 add all env variables
+package other helm charts

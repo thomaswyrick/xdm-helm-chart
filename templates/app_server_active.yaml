@@ -25,17 +25,17 @@ spec:
           envFrom:
             - configMapRef:
                 name: xdm-configmap
-          # envFrom:
-          #   - secretRef:
-          #       name: xdm-secrets
+          envFrom:
+            - secretRef:
+                name: xdm-secrets
           ports:
             - containerPort: 8080
-          # livenessProbe:
-          #   httpGet:
-          #     path: /semarchy/api/rest/probes/started
-          #     port: 8080
-          #   initialDelaySeconds: 3
-          #   periodSeconds: 10
+          startupProbe:
+            httpGet:
+              path: /semarchy/api/rest/probes/started
+              port: 8080
+            failureThreshold: 10
+            periodSeconds: 10
       restartPolicy: Always
 ---
 apiVersion: v1

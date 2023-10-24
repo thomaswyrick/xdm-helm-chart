@@ -1,0 +1,18 @@
+apiVersion: v1
+kind:  ConfigMap
+metadata:
+  name: xdm-configmap
+data:
+  # SEMARCHY_SETUP_TOKEN: {{ .Values.semarchy_setup_token }}
+  
+  # XDM_REPOSITORY_DRIVER: {{ .Values.repository_driver }}
+  # XDM_REPOSITORY_URL: {{ .Values.xdm_repository_url }}
+  
+  # XDM_REPOSITORY_USERNAME: {{ .Values.xdm_repository_username }}
+  # XDM_REPOSITORY_PASSWORD: {{ .Values.xdm_repository_password }}
+  # XDM_REPOSITORY_READONLY_USERNAME: {{ .Values.xdm_repository_ro_username }}
+  # XDM_REPOSITORY_READONLY_PASSWORD: {{ .Values.xdm_repository_ro_password }}
+
+  {{ if eq .Values.repository_driver "oracle.jdbc.OracleDriver" }}
+  XDM_REPOSITORY_READONLY_CONNECTIONINITSQL: {{ .Value.repository_ro_cnxn_init_sql }}
+  {{ end }}
