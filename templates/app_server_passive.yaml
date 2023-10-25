@@ -15,13 +15,16 @@ spec:
         app: semarchy-appserver-passive
     spec:
       containers:
-        - image: {{tpl .Values.xdm_passive_image .}}
-          name: semarchy-appserver-passive
+        - name: semarchy-appserver-passive
+          image: {{tpl .Values.xdm_passive_image .}}
           resources:
             requests:
               memory: "{{.Values.passive_mem_requests}}"
             limits:
               memory: "{{.Values.passive_mem_limits}}"
+          volumeMounts:
+            - mountPath: /usr/local/tomcat/logs
+              name: logs
           envFrom:
             - configMapRef:
                 name: xdm-configmap
@@ -36,6 +39,15 @@ spec:
               port: 8080
             failureThreshold: 10
             periodSeconds: 10
+        - name: logging-sidecar
+          image: busybox:1.28
+          args: [/bin/sh, -c, 'tail -n+1 -F /usr/local/tomcat/logs/semarchy.log']
+          volumeMounts:
+            - name: logs
+              mountPath: /usr/local/tomcat/logs
+      volumes:
+        - name: logs
+          emptyDir: {}
       restartPolicy: Always
 ---
 apiVersion: v1
