@@ -28,7 +28,7 @@ The intent of this chart is to simplify Semarchy xDM installations. Currently, i
 8. Launch
 'helm install xdm-minikube .'
 
-### Runnong on AKS
+### Running on AKS
 1. Set K8 Context
 'az aks get-credentials --name ts-aks-test-2 --resource-group ts-tomwyrick-aks-test'
 
