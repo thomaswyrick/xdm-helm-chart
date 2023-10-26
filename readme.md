@@ -1,5 +1,5 @@
 ## Introduction
-The intent of this chart is to simplify Semarchy xDM installations. Currently, it will install xDM in high-availability configuration and provision TLS termination using [LetsEncrypt](https://letsencrypt.org/).
+The intent of this chart is to simplify [Semarchy](https://semarchy.com) xDM installations. Currently, it will install xDM in a high-availability configuration and provision SSL/TLS certs using [LetsEncrypt](https://letsencrypt.org/).
 
 ### Running on minikube
 
