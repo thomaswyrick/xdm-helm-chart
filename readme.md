@@ -4,7 +4,6 @@ The intent of this chart is to simplify [Semarchy](https://semarchy.com) xDM ins
 ### Installing on minikube
 
 1. Enable ingress in Minikube
-<<<<<<< HEAD
 ```
 minikube addons enable ingress
 ```
