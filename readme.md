@@ -55,7 +55,9 @@ helm install aks-xdm .
 5. Modify values.yaml accordingly
 
 6. Launch
-'helm install mini-xdm . --set ingress-nginx.enabled=false'
+```
+helm install mini-xdm . --set ingress-nginx.enabled=false
+```
 
 ### Running on AKS
 1. Set K8 Context
@@ -73,9 +75,5 @@ helm install aks-xdm .
 
 6. Launch
 'helm install xdm-minikube .'
-
->>>>>>> 19373c8 (Added condition to enable ingress-nginx)
-
-
 
 
