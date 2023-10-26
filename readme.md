@@ -3,7 +3,7 @@ The intent of this chart is to simplify [Semarchy](https://semarchy.com) xDM ins
 
 ### Installation
 #### General
-'''
+```
 helm install k8-xdm . \
 --set active_host_name=xdma.yourdomain.com \
 --set passive_host_name=xdm.yourdomain.com \
@@ -13,7 +13,7 @@ helm install k8-xdm . \
 --set xdm_repository_password: semarchy_repository \
 --set xdm_repository_ro_username: semarchy_repository_ro \
 --set xdm_repository_ro_password: semarchy_repository_ro
-'''
+```
 
 #### minikube
 
