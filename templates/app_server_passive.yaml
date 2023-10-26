@@ -36,9 +36,6 @@ spec:
               port: 8080
             failureThreshold: 10
             periodSeconds: 10
-      volumes:
-        - name: logs
-          emptyDir: {}
       restartPolicy: Always
 ---
 apiVersion: v1
