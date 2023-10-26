@@ -22,9 +22,6 @@ spec:
               memory: "{{ .Values.active_mem_requests }}"
             limits:
               memory: "{{ .Values.active_mem_limits }}"
-          volumeMounts:
-            - mountPath: /usr/local/tomcat/logs
-              name: logs
           envFrom:
             - configMapRef:
                 name: xdm-configmap
@@ -39,15 +36,6 @@ spec:
               port: 8080
             failureThreshold: 10
             periodSeconds: 10
-        - name: logging-sidecar
-          image: busybox:1.28
-          args: [/bin/sh, -c, 'tail -n+1 -F /usr/local/tomcat/logs/semarchy.log']
-          volumeMounts:
-            - name: logs
-              mountPath: /usr/local/tomcat/logs
-      volumes:
-        - name: logs
-          emptyDir: {}
       restartPolicy: Always
 ---
 apiVersion: v1
