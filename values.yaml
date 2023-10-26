@@ -2,6 +2,13 @@ xdm_version: latest
 xdm_active_image: semarchy/xdm:{{ .Values.xdm_version }}
 xdm_passive_image: semarchy/xdm:{{ .Values.xdm_version }}-passive
 
+# This is to make AKS work. I am open to better options.
+ingress-nginx:
+  controller:
+    service:
+      annotations:
+        service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: /healthz
+
 # DNS Configuration
 active_host_name: xdma.aks.servers.semarchy.com
 passive_host_name: xdm.aks.servers.semarchy.com
