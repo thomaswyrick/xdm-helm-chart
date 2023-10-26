@@ -26,12 +26,14 @@ appVersion: "1.16.0"
 icon: https://cdn-kbjbh.nitrocdn.com/wvDvVTGOEVEZTAtrMdEuemkzfAajGxeU/assets/images/optimized/rev-7858ec8/semarchy.com/wp-content/uploads/2021/12/Semarchy-xDM-logo.svg
 
 dependencies:
+  - name: ingress-nginx
+    version: v4.8.3
+    repository: https://kubernetes.github.io/ingress-nginx
+    alias: ingress-nginx
+    condition: ingress-nginx.enabled
   - name: cert-manager
     version: v1.13.1
     repository: https://charts.jetstack.io
     alias: cert-manager
     condition: cert-manager.enabled
-  - name: ingress-nginx
-    version: v4.8.3
-    repository: https://kubernetes.github.io/ingress-nginx
-    alias: ingress-nginx
+
