@@ -3,6 +3,11 @@ The intent of this chart is to simplify [Semarchy](https://semarchy.com) xDM ins
 
 ### Installation
 #### General
+1. Install cert-manager CRDS
+```
+kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.1.0/cert-manager.crds.yaml
+```
+2. Install xDM
 ```
 helm install k8-xdm . \
 --set active_host_name=xdma.yourdomain.com \
@@ -17,7 +22,7 @@ helm install k8-xdm . \
 
 #### minikube
 
-1. Enable ingress in Minikube
+1. Enable ingress in minikube
 ```
 minikube addons enable ingress
 ```
@@ -30,7 +35,7 @@ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/relea
 kubectl get ingress
 ```
 4. Add entries for active and passive hostnames in the hosts file pointing to the ingress IP
-5. Launch
+5. Install xDM
 ```
 helm install k8-xdm . \
 --set active_host_name=xdma.yourdomain.com \
