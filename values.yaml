@@ -1,6 +1,6 @@
 # --- Dependency Values ---
 ingress-nginx:
-  enabled: true
+  enabled: false
   controller:
     service:
       annotations:
@@ -8,12 +8,16 @@ ingress-nginx:
         service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: /healthz
 
 cert-manager:
-  enabled: true
+  enabled: false
 
 # --- XDM Values ---
 xdm_version: latest
 xdm_active_image: semarchy/xdm:{{ .Values.xdm_version }}
 xdm_passive_image: semarchy/xdm:{{ .Values.xdm_version }}-passive
+
+# NodePort Values
+xdm_active_service_nodeport: 30000
+xdm_passive_service_nodeport: 30001
 
 # DNS Configuration
 active_host_name: xdma.yourdomain.com
@@ -27,10 +31,10 @@ acme_server_url: https://acme-v02.api.letsencrypt.org/directory
 acme_registration_email: thomas.wyrick@semarchy.com
 
 # Pod Configurations
-active_mem_requests: 2Gi
-active_mem_limits: 3Gi
+active_mem_requests: 4Gi
+active_mem_limits: 5Gi
 
-passive_node_replicas: 1
+passive_node_replicas: 2
 passive_mem_requests: 2Gi
 passive_mem_limits: 3Gi
 
@@ -39,15 +43,15 @@ semarchy_setup_token: mySecretToken
 
 # Database Users and Configuration
 # -- PostgreSQL --
-repository_driver: org.postgresql.Driver
-repository_url: jdbc:postgresql://<cluster-ip-address>:<cluster-port>/semarchy_repository
+xdm_repository_driver: org.postgresql.Driver
+xdm_repository_url: jdbc:postgresql://<cluster-ip-address>:<cluster-port>/semarchy_repository
 # -- SQL Server --
-#repository_driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
-#repository_url: jdbc:sqlserver://localhost:1433;databaseName=REPOSITORY
+#xdm_repository_driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+#xdm_repository_url: jdbc:sqlserver://localhost:1433;databaseName=REPOSITORY
 # -- Oracle Database --
-#repository_driver: oracle.jdbc.OracleDriver
-#repository_url: jdbc:oracle:thin:@localhost:1521:XE
-#repository_ro_cnxn_init_sql: ALTER SESSION SET CURRENT_SCHEMA = repository_user
+#xdm_repository_driver: oracle.jdbc.OracleDriver
+#xdm_repository_url: jdbc:oracle:thin:@localhost:1521:XE
+#xdm_repository_ro_cnxn_init_sql: ALTER SESSION SET CURRENT_SCHEMA = repository_user
 
 xdm_repository_username: semarchy_repository
 xdm_repository_password: semarchy_repository

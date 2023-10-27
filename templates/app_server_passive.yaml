@@ -45,7 +45,15 @@ metadata:
   labels:
     app: semarchy-appserver-passive
 spec:
+  {{- if (index .Values "ingress-nginx" "enabled") }}
+  type: ClusterIP
+  {{- else }}
+  type: NodePort
+  {{- end }}
   ports:
     - port: 8080
+      {{- if not (index .Values "ingress-nginx" "enabled") }}
+      nodePort: {{ .Values.xdm_passive_service_nodeport }}
+      {{- end }}
   selector:
     app: semarchy-appserver-passive
