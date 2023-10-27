@@ -1,7 +1,7 @@
 ## Introduction
-The intent of this chart is to simplify [Semarchy](https://semarchy.com) xDM Kubernetes installations. It will deploy a high-availability environment. In [xDM HA terminology](https://www.semarchy.com/doc/semarchy-xdm/xdm/5.3/Install/high-availability.html), this mean one active node and many passive nodes.
+This chart will deploy [Semarchy](https://semarchy.com) xDM into a Kubernetes cluster. By default, it will create a high-availability xDM configuration. In [xDM HA terminology](https://www.semarchy.com/doc/semarchy-xdm/xdm/5.3/Install/high-availability.html), this means one active node and many passive nodes.
 
-For the load-balancer, you can either use the cloud load-balancer of your choice (AWS ELB, Azure Application Gateway, etc.), or Kubernetes native NGINX which is pre-packaged as a subchart. 
+For the load-balancer, you can either use a cloud load-balancer of your choice (AWS ELB, Azure Application Gateway, etc.), or the Kubernete's native NGINX which is pre-packaged as a subchart. 
 
 ![](images/load_balancer_comparison.png)
 
