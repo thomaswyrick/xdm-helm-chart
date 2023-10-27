@@ -41,6 +41,7 @@ helm install xdm-dev . \
 --set cert-manager.enabled: true \
 --set active_host_name: xdma.mydomain.com \
 --set passive_host_name: xdm.mydomain.com \
+--set acme_registration_email: john.smith@contoso.com \
 --set xdm_repository_driver: org.postgresql.Driver \
 --set xdm_repository_url: jdbc:postgresql://<cluster-ip-address>:<cluster-port>/semarchy_repository \
 --set xdm_repository_username: semarchy_repository \
