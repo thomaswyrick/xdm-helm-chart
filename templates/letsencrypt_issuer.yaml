@@ -11,7 +11,7 @@ spec:
     email: {{.Values.acme_registration_email}}
     # Name of a secret used to store the ACME account private key
     privateKeySecretRef:
-      name: {{ .Release.Name }}-private-key-tls
+      name: {{ .Release.Name }}-tls-private-key
     # Enable the HTTP-01 challenge provider
     solvers:
       - http01:

@@ -3,6 +3,7 @@ kind:  ConfigMap
 metadata:
   name: xdm-configmap
 data:
+  JAVA_OPTS: "-DallowXForwardedHeaders=true"
   {{ if eq .Values.repository_driver "oracle.jdbc.OracleDriver" }}
   XDM_REPOSITORY_READONLY_CONNECTIONINITSQL: {{ .Value.repository_ro_cnxn_init_sql }}
   {{ end }}

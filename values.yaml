@@ -1,10 +1,8 @@
 # --- Dependency Values ---
 ingress-nginx:
-  enabled: false
   controller:
     service:
       annotations:
-        # This is to make AKS work. I am open to better options.
         service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: /healthz
 
 cert-manager:
@@ -28,7 +26,7 @@ passive_host_name: xdm.yourdomain.com
 #acme_server_url: https://acme-staging-v02.api.letsencrypt.org/directory
 # -- ACME Prod ---
 acme_server_url: https://acme-v02.api.letsencrypt.org/directory
-acme_registration_email: thomas.wyrick@semarchy.com
+acme_registration_email: fakeperson@domain.com
 
 # Pod Configurations
 active_mem_requests: 4Gi
