@@ -31,5 +31,5 @@ helm install xdm . \
 
 Retrieve Ingress IP Address:
 ```
-kubectl get ingress xdm-ingress --n dev
+kubectl get ingress xdm-ingress -n dev
 ```
