@@ -29,7 +29,6 @@ helm install xdm . \
 --set xdm_repository_ro_password=semarchy_repository_ro
 
 
-Retrieve Ingress IP Address:
-```
+# Retrieve Ingress IP Address:
 kubectl get ingress xdm-ingress -n dev
 ```
