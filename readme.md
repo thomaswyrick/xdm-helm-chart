@@ -1,6 +1,7 @@
 ## Introduction
 This chart will deploy [Semarchy](https://semarchy.com) xDM into a Kubernetes cluster. By default, it will create a high-availability xDM configuration. This means one active node and many passive nodes in [xDM HA terminology](https://www.semarchy.com/doc/semarchy-xdm/xdm/5.3/Install/high-availability.html).
 
+![Example Formation](/images/xdm_generic_k8_cluster.png)
 
 ### Usage
 The ingress will expose a single IP address outside of the cluster. You will need to register two DNS names against this address. One for the active service and another for the passive service.  
